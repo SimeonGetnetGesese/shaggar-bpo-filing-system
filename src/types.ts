@@ -26,7 +26,29 @@ export interface BrandIdentity {
   secondaryMarks: string[]; // URLs
 }
 
+export interface WebsiteSpec {
+  siteName: string;
+  pages: string[];
+  features: string[];
+  techStack: string[];
+  designRationale: string;
+}
+
+export interface TrainingSpec {
+  programName: string;
+  numTrainees: number;
+  trainerNames: string[];
+  curriculum: string[];
+  duration: string;
+}
+
 export interface ChatMessage {
   role: 'user' | 'model';
   text: string;
+}
+
+export interface ServiceData {
+  branding?: BrandIdentity;
+  website?: WebsiteSpec;
+  training?: TrainingSpec;
 }

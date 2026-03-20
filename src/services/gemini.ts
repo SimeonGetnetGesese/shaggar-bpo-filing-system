@@ -1,5 +1,5 @@
 import { GoogleGenAI, Type, GenerateContentResponse } from "@google/genai";
-import { BrandIdentity, ImageSize } from "../types";
+import { BrandIdentity, ImageSize, WebsiteSpec, TrainingSpec } from "../types";
 
 const MODEL_TEXT = "gemini-3.1-pro-preview";
 const MODEL_IMAGE = "gemini-3-pro-image-preview";
@@ -71,6 +71,58 @@ export const generateBrandImage = async (prompt: string, size: ImageSize): Promi
   }
   
   throw new Error("No image generated");
+};
+
+export const generateWebsiteSpec = async (mission: string): Promise<Partial<WebsiteSpec>> => {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+  
+  const response = await ai.models.generateContent({
+    model: MODEL_TEXT,
+    contents: `Generate a website architecture and design specification for a company with this mission: "${mission}". 
+    Provide a site name, a list of 5 key pages, a list of 5 core features, a tech stack (3-5 items), and a design rationale.`,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          siteName: { type: Type.STRING },
+          pages: { type: Type.ARRAY, items: { type: Type.STRING } },
+          features: { type: Type.ARRAY, items: { type: Type.STRING } },
+          techStack: { type: Type.ARRAY, items: { type: Type.STRING } },
+          designRationale: { type: Type.STRING }
+        },
+        required: ["siteName", "pages", "features", "techStack", "designRationale"]
+      }
+    }
+  });
+
+  return JSON.parse(response.text || "{}");
+};
+
+export const generateTrainingSpec = async (mission: string): Promise<Partial<TrainingSpec>> => {
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY! });
+  
+  const response = await ai.models.generateContent({
+    model: MODEL_TEXT,
+    contents: `Generate a training program specification for a company with this mission: "${mission}". 
+    Provide a program name, a realistic number of trainees (integer), a list of 3 trainer names, a list of 5 curriculum modules, and a duration (e.g., "6 Weeks").`,
+    config: {
+      responseMimeType: "application/json",
+      responseSchema: {
+        type: Type.OBJECT,
+        properties: {
+          programName: { type: Type.STRING },
+          numTrainees: { type: Type.INTEGER },
+          trainerNames: { type: Type.ARRAY, items: { type: Type.STRING } },
+          curriculum: { type: Type.ARRAY, items: { type: Type.STRING } },
+          duration: { type: Type.STRING }
+        },
+        required: ["programName", "numTrainees", "trainerNames", "curriculum", "duration"]
+      }
+    }
+  });
+
+  return JSON.parse(response.text || "{}");
 };
 
 export const chatWithGemini = async (history: { role: string, text: string }[], message: string) => {

@@ -57,17 +57,17 @@ export const BrandBible: React.FC<BrandBibleProps> = ({ identity, onUpdateLogo, 
         {/* Left Column: Visuals */}
         <div className="lg:col-span-2 space-y-8">
           {/* Primary Logo */}
-          <section className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+          <section className="bg-white p-8 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2 font-semibold text-slate-800">
-                <ImageIcon className="w-5 h-5 text-indigo-500" />
+              <div className="flex items-center gap-2 font-bold text-black uppercase tracking-tight">
+                <ImageIcon className="w-5 h-5" />
                 Primary Logo
               </div>
               <div className="flex items-center gap-4">
                 <select 
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value as ImageSize)}
-                  className="text-xs border-slate-200 rounded-lg px-2 py-1"
+                  className="text-xs border-2 border-black px-2 py-1 font-bold"
                 >
                   <option value={ImageSize.SIZE_1K}>1K</option>
                   <option value={ImageSize.SIZE_2K}>2K</option>
@@ -76,35 +76,35 @@ export const BrandBible: React.FC<BrandBibleProps> = ({ identity, onUpdateLogo, 
                 <button 
                   onClick={handleGenerateLogo}
                   disabled={isGeneratingLogo}
-                  className="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-400 hover:text-indigo-600"
+                  className="p-2 border-2 border-black hover:bg-black hover:text-white transition-all"
                 >
                   {isGeneratingLogo ? <Loader2 className="w-5 h-5 animate-spin" /> : <RefreshCw className="w-5 h-5" />}
                 </button>
               </div>
             </div>
-            <div className="aspect-square bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden border border-dashed border-slate-200">
+            <div className="aspect-square bg-slate-50 flex items-center justify-center overflow-hidden border-2 border-black border-dashed">
               {identity.primaryLogoUrl ? (
                 <img src={identity.primaryLogoUrl} alt="Primary Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer" />
               ) : (
                 <div className="text-center p-8">
                   <p className="text-slate-400 text-sm mb-4">No logo generated yet</p>
-                  <button onClick={handleGenerateLogo} className="text-indigo-600 font-semibold text-sm hover:underline">Generate Now</button>
+                  <button onClick={handleGenerateLogo} className="text-black font-bold text-sm hover:underline uppercase">Generate Now</button>
                 </div>
               )}
             </div>
           </section>
 
           {/* Secondary Marks */}
-          <section className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
+          <section className="bg-white p-8 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
             <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2 font-semibold text-slate-800">
-                <Sparkles className="w-5 h-5 text-indigo-500" />
+              <div className="flex items-center gap-2 font-bold text-black uppercase tracking-tight">
+                <Sparkles className="w-5 h-5" />
                 Secondary Marks
               </div>
               <button 
                 onClick={handleGenerateMarks}
                 disabled={isGeneratingMarks}
-                className="p-2 hover:bg-slate-50 rounded-full transition-colors text-slate-400 hover:text-indigo-600"
+                className="p-2 border-2 border-black hover:bg-black hover:text-white transition-all"
               >
                 {isGeneratingMarks ? <Loader2 className="w-5 h-5 animate-spin" /> : <RefreshCw className="w-5 h-5" />}
               </button>
@@ -112,13 +112,13 @@ export const BrandBible: React.FC<BrandBibleProps> = ({ identity, onUpdateLogo, 
             <div className="grid grid-cols-1 gap-4">
               {identity.secondaryMarks.length > 0 ? (
                 identity.secondaryMarks.map((url, idx) => (
-                  <div key={idx} className="aspect-[2/1] bg-slate-50 rounded-xl flex items-center justify-center overflow-hidden border border-slate-200">
+                  <div key={idx} className="aspect-[2/1] bg-slate-50 flex items-center justify-center overflow-hidden border-2 border-black">
                     <img src={url} alt={`Secondary Mark ${idx}`} className="w-full h-full object-contain" referrerPolicy="no-referrer" />
                   </div>
                 ))
               ) : (
-                <div className="aspect-[2/1] bg-slate-50 rounded-xl flex items-center justify-center border border-dashed border-slate-200">
-                  <button onClick={handleGenerateMarks} className="text-indigo-600 font-semibold text-sm hover:underline">Generate Marks</button>
+                <div className="aspect-[2/1] bg-slate-50 flex items-center justify-center border-2 border-black border-dashed">
+                  <button onClick={handleGenerateMarks} className="text-black font-bold text-sm hover:underline uppercase">Generate Marks</button>
                 </div>
               )}
             </div>
@@ -128,24 +128,24 @@ export const BrandBible: React.FC<BrandBibleProps> = ({ identity, onUpdateLogo, 
         {/* Right Column: Specs */}
         <div className="space-y-8">
           {/* Color Palette */}
-          <section className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="flex items-center gap-2 font-semibold text-slate-800 mb-6">
-              <Palette className="w-5 h-5 text-indigo-500" />
+          <section className="bg-white p-8 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="flex items-center gap-2 font-bold text-black uppercase tracking-tight mb-6">
+              <Palette className="w-5 h-5" />
               Color Palette
             </div>
             <div className="space-y-4">
               {identity.palette.map((color, idx) => (
                 <div key={idx} className="flex items-center gap-4">
                   <div 
-                    className="w-12 h-12 rounded-lg shadow-inner border border-black/5"
+                    className="w-12 h-12 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
                     style={{ backgroundColor: color.hex }}
                   />
                   <div className="flex-1">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-bold text-slate-900">{color.name}</span>
-                      <code className="text-[10px] bg-slate-50 px-1.5 py-0.5 rounded text-slate-500">{color.hex}</code>
+                      <span className="text-sm font-bold text-black">{color.name}</span>
+                      <code className="text-[10px] bg-black text-white px-1.5 py-0.5 font-bold">{color.hex}</code>
                     </div>
-                    <p className="text-xs text-slate-500 mt-1">{color.usage}</p>
+                    <p className="text-xs text-slate-600 mt-1">{color.usage}</p>
                   </div>
                 </div>
               ))}
@@ -153,21 +153,21 @@ export const BrandBible: React.FC<BrandBibleProps> = ({ identity, onUpdateLogo, 
           </section>
 
           {/* Typography */}
-          <section className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-            <div className="flex items-center gap-2 font-semibold text-slate-800 mb-6">
-              <TypeIcon className="w-5 h-5 text-indigo-500" />
+          <section className="bg-white p-8 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+            <div className="flex items-center gap-2 font-bold text-black uppercase tracking-tight mb-6">
+              <TypeIcon className="w-5 h-5" />
               Typography
             </div>
             <div className="space-y-6">
               <div>
                 <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 block mb-2">Header Font</label>
-                <div className="p-4 bg-slate-50 rounded-xl">
-                  <p className="text-2xl text-slate-900" style={{ fontFamily: identity.fonts.headerFont }}>{identity.fonts.headerFont}</p>
+                <div className="p-4 bg-slate-50 border-2 border-black">
+                  <p className="text-2xl text-black" style={{ fontFamily: identity.fonts.headerFont }}>{identity.fonts.headerFont}</p>
                 </div>
               </div>
               <div>
                 <label className="text-[10px] uppercase tracking-widest font-bold text-slate-400 block mb-2">Body Font</label>
-                <div className="p-4 bg-slate-50 rounded-xl">
+                <div className="p-4 bg-slate-50 border-2 border-black">
                   <p className="text-sm text-slate-700 leading-relaxed" style={{ fontFamily: identity.fonts.bodyFont }}>
                     {identity.fonts.bodyFont} - The quick brown fox jumps over the lazy dog.
                   </p>
